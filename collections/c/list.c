@@ -56,22 +56,22 @@ void list_prepend(list_t* list, void* value){
     list->count++;
 }
 
-void list_print(list_t* list){
-   
+void list_print(list_t* list, void (*print)(void*)){
+
     node_t* node = list->head;
    
     while(node != NULL){
-        printf("%d\n", *((int*)node->data));
+        print(node->data);
         node = node->next;
     }
 }
 
-void list_inverse_print(list_t* list){
+void list_inverse_print(list_t* list, void (*print)(void*)){
    
     node_t* node = list->tail;
    
     while(node != NULL){
-        printf("%d\n", *((int*)node->data));
+        print(node->data);
         node = node->previous;
     }
 }

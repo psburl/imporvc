@@ -3,5 +3,6 @@
 
 #include "collections/collections.h"
 #include "io/io.h"
+#include "string/string.h"
 
 #endif

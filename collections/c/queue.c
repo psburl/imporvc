@@ -38,12 +38,12 @@ node_t* queue_get(queue_t* queue){
     return element;
 }
 
-void queue_print(queue_t* queue){
+void queue_print(queue_t* queue, void (*print)(void*)){
    
     node_t* node = queue->head;
    
     while(node != NULL){
-        printf("%d\n", *((int*)node->data));
+        print(node->data);
         node = node->next;
     }
 }

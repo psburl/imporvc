@@ -1,5 +1,9 @@
 #include "../collections/collections.h"
 
+void print(void* value){
+	printf("%d\n", *(int*)value);
+}
+
 int main() {
    
     list_t* list = new_list(sizeof(int));
@@ -12,5 +16,5 @@ int main() {
    
    
     list_remove_element(list, 1);
-    list_print(list);
+    list_print(list, print);
 }

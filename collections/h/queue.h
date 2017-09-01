@@ -16,7 +16,7 @@ typedef struct queue_t{
 queue_t* new_queue(size_t type_size);
 void queue_insert(queue_t* queue, void* value);
 node_t* queue_get(queue_t* queue);
-void queue_print(queue_t* queue);
+void queue_print(queue_t* queue, void (*print)(void*));
 
 #include "../c/queue.c"
 

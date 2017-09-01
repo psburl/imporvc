@@ -19,6 +19,7 @@ stack_t* new_stack(size_t type_size);
 void stack_push(stack_t* stack, void* value);
 node_t* stack_pop(stack_t* stack);
 int stack_empty(stack_t* stack);
+void stack_print(stack_t* stack, void (*print)(void*));
 
 #include "../c/stack.c"
 

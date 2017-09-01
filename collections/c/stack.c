@@ -41,3 +41,13 @@ node_t* stack_pop(stack_t* stack){
 int stack_empty(stack_t* stack){
     return stack->count==0;
 }
+
+void stack_print(stack_t* queue, void (*print)(void*)){
+   
+    node_t* node = queue->head;
+   
+    while(node != NULL){
+        print(node->data);
+        node = node->next;
+    }
+}
