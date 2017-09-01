@@ -42,9 +42,9 @@ int stack_empty(stack_t* stack){
     return stack->count==0;
 }
 
-void stack_print(stack_t* queue, void (*print)(void*)){
+void stack_print(stack_t* stack, void (*print)(void*)){
    
-    node_t* node = queue->head;
+    node_t* node = stack->top;
    
     while(node != NULL){
         print(node->data);
