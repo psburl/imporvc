@@ -12,12 +12,22 @@ void print_edge(void* edge){
 }
 
 void print_vertex(void* v){
-	printf("%d-", *(int*)((vertex_t*)v)->data);
+	printf("%d", *(int*)((vertex_t*)v)->data);
 }
+
+void print_path(void* v){
+
+	graph_path_t* path = (graph_path_t*)v;
+	printf("from: %d - ",  *(int*)path->from->data);
+	printf("to: %d - ",  *(int*)path->to->data);
+	printf("start: %d - ",  *(int*)path->start->data);
+	printf("weight: %lf\n", path->distance);
+}
+
 
 int main(){
 
-	graph_t* graph = new_graph(sizeof(int));
+	graph_t* graph = new_graph(sizeof(int), 0);
 	int value = 1;
 	graph_add_vertex(graph, &value);
 
@@ -30,13 +40,16 @@ int main(){
 	find = 3;
 	vertex_t* vertex2 = graph_add_vertex(graph, &find);
 
-	graph_add_adjacency(vertex, neighboor, 1.0, 0);
-	graph_add_adjacency(vertex, vertex2, 3.1, 0);
-	graph_add_adjacency(neighboor, vertex2, 2.0, 0);
-	
-	graph_path_t* path = graph_min_distance(graph, vertex, vertex2, compare);
+	find = 4;
+	vertex_t* vertex3 = graph_add_vertex(graph, &find);
 
-	printf("%lf\n", path->distance);
-	printf("%d\n", *(int*)((vertex_t*)path->start)->data);
+	graph_add_adjacency(vertex, neighboor, 1.0, 0);
+	graph_add_adjacency(neighboor, vertex2, 2.9, 0);
+	graph_add_adjacency(vertex2, vertex3, 2.0, 0);
+	
+	list_t* l = djikstra(graph, compare);
+
+	list_print(l, print_path);
+
     return 0;
 }

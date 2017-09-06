@@ -21,26 +21,30 @@ typedef struct graph_t{
 
 	size_t type_size;
 	list_t* vertex;
+	int digraph;
 
 }graph_t;
 
 typedef struct graph_path_t{
 
+	vertex_t* from;
+	vertex_t* to;
 	vertex_t* start;
 	double distance;
 
 }graph_path_t;
 
-graph_t* new_graph(size_t type_size);
+
+graph_t* new_graph(size_t type_size, int digraph);
 vertex_t* new_vertex(size_t type_size, void* data);
 edge_t* new_edge(vertex_t* neighboor, double weight);
 vertex_t* graph_add_vertex(graph_t* graph, void* value);
 vertex_t* graph_get_vertex_by_position(graph_t* graph, int position);
 vertex_t* graph_get_vertex_by_data(graph_t* graph, void* value, int (*compare)(void*, void*));
-void graph_add_adjacency(vertex_t* vertex, vertex_t* neighboor,double weight, int digraph);
-void graph_add_adjacency_by_data(graph_t* graph, void* data,
- void* data2, double weight, int digraph, int (*compare)(void*, void*));
+void graph_add_adjacency(vertex_t* vertex, vertex_t* neighboor, double weight, int digraph);
+void graph_add_adjacency_by_data(graph_t* graph, void* data, void* data2, double weight, int (*compare)(void*, void*));
 graph_path_t* graph_min_distance(graph_t* graph, vertex_t* v, vertex_t* w, int (*compare)(void*, void*));
+list_t* djikstra(graph_t* graph, int (*compare)(void*, void*));
 
 #include "graph.c"
 

@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <assert.h>
 
-graph_t* new_graph(size_t type_size){
+graph_t* new_graph(size_t type_size, int digraph){
 
 	graph_t* graph = malloc(sizeof(graph_t));
 	graph->type_size = type_size;
+	graph->digraph = digraph;
 	graph->vertex = new_list(sizeof(vertex_t));
 
 	return graph;
@@ -66,41 +67,46 @@ void graph_add_adjacency(vertex_t* vertex,
 }
 
 void graph_add_adjacency_by_data(graph_t* graph, void* data,
- void* data2, double weight, int digraph, int (*compare)(void*, void*)){
+ void* data2, double weight, int (*compare)(void*, void*)){
 
 	vertex_t* v1 = graph_get_vertex_by_data(graph, data, compare);
 	assert(v1 != NULL);
 	vertex_t* v2 = graph_get_vertex_by_data(graph, data2, compare);
 	assert(v2 != NULL);
-	graph_add_adjacency(v1, v2, weight,  digraph);
+	graph_add_adjacency(v1, v2, weight, graph->digraph);
 }
 
 
 graph_path_t* graph_min_distance_recursion(graph_path_t* path, list_t* passed,
  vertex_t* c, vertex_t* w, int (*compare)(void*, void*)) {
 
+	//verify if already passed by it vertex.
 	if (list_get_by_data(passed, c, compare) != NULL){
 		path->distance = -1;
 		return path;
 	}
 
-	list_append(passed, c);
-	list_t* adjacencies = c->adjacencies;
-	node_t* element = (node_t*)adjacencies->head;
-	double min = -1;
 	vertex_t* included = NULL;
+	double min = -1;
+
+	// set this vertex to already passed.
+	list_append(passed, c);
+	list_t* adjacencies = c->adjacencies;//get adjacencies
+	node_t* element = (node_t*)adjacencies->head;
 	
 	while(element != NULL){
 
 		edge_t* edge = (edge_t*)element->data;
+		// verify if this edge go to find vertex
 		if(compare(edge->neighboor, w)){
+
 			if(min == -1 || min > edge->weight){
 				min = edge->weight;
 				included = edge->neighboor;
 			}
 		}
 		else{
-
+			// get min distance
 			graph_path_t* min_recursion = graph_min_distance_recursion(path,
 				passed, (void*)edge->neighboor, w, compare);
 
@@ -122,7 +128,44 @@ graph_path_t* graph_min_distance_recursion(graph_path_t* path, list_t* passed,
 graph_path_t* graph_min_distance(graph_t* graph, vertex_t* v, vertex_t* w, int (*compare)(void*, void*)){
 
 	graph_path_t* path = malloc(sizeof(graph_path_t));
+	path->from = v;
+	path->to = w;
+
+	if(compare(v,w)){
+		path->distance = 0;
+		path->start = v;
+		return path;
+	}
+
 	list_t* passed = new_list(sizeof(vertex_t));
 	graph_min_distance_recursion(path, passed, v, w, compare);
 	return path;
+}
+
+list_t* djikstra(graph_t* graph, int (*compare)(void*, void*)){
+
+	list_t* list = new_list(sizeof(graph_path_t));
+	list_t* vertex = graph->vertex;
+	node_t* current_v = (node_t*)vertex->head;
+
+	while(current_v != NULL){
+
+		vertex_t* v = (vertex_t*)current_v->data;
+
+		list_t* destinations = graph->vertex;
+		node_t* current_w = (node_t*)destinations->head;
+
+
+		while(current_w != NULL){
+
+			vertex_t* w = (vertex_t*)current_w->data;
+			graph_path_t* min_path = graph_min_distance(graph, v, w, compare);
+			list_append(list, min_path);
+			current_w = current_w->next;
+		}
+
+		current_v = current_v->next;
+	}
+
+	return list;
 }
