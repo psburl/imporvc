@@ -109,3 +109,15 @@ void list_remove_element(list_t* list, int position){
     free(element);
     count--;
 }
+
+node_t* list_get_by_data(list_t* list, void* data, int (*compare)(void*, void*)){
+
+    node_t* element = list->head;
+
+    while(element != NULL){
+        if(compare(element->data, data))
+            return element;
+        element = element->next;
+    }
+    return NULL;
+}
