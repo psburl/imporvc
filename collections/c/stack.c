@@ -3,9 +3,9 @@
 #include <assert.h>
 #include <stdlib.h>
 
-stack_t* new_stack(size_t type_size){
+pstack_t* new_stack(size_t type_size){
 
-    stack_t* stack = malloc(sizeof(stack_t));
+    pstack_t* stack = malloc(sizeof(pstack_t));
     assert(type_size > 0);
     stack->top = NULL;
     stack->type_size = type_size;
@@ -13,7 +13,7 @@ stack_t* new_stack(size_t type_size){
     return stack;
 }
 
-void stack_push(stack_t* stack, void* value){
+void stack_push(pstack_t* stack, void* value){
   
     node_t* element =  malloc(sizeof(node_t));
     element->data = malloc(stack->type_size);
@@ -30,7 +30,7 @@ void stack_push(stack_t* stack, void* value){
     stack->count++;
 }
 
-node_t* stack_pop(stack_t* stack){
+node_t* stack_pop(pstack_t* stack){
   
     node_t* element = stack->top;
     stack->top = stack->top->next;
@@ -38,11 +38,11 @@ node_t* stack_pop(stack_t* stack){
     return element;
 }
 
-int stack_empty(stack_t* stack){
+int stack_empty(pstack_t* stack){
     return stack->count==0;
 }
 
-void stack_print(stack_t* stack, void (*print)(void*)){
+void stack_print(pstack_t* stack, void (*print)(void*)){
    
     node_t* node = stack->top;
    
