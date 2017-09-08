@@ -110,8 +110,9 @@ graph_path_t* graph_min_distance_recursion(graph_path_t* path, list_t* passed,
 			graph_path_t* min_recursion = graph_min_distance_recursion(path,
 				passed, (void*)edge->neighboor, w, compare);
 
-			if(min_recursion->distance != -1 && (min == -1 || min > min_recursion->distance)){
-				min = min_recursion->distance + edge->weight;
+			double distance = min_recursion->distance + edge->weight;
+			if(min_recursion->distance != -1 && (min == -1 || min > distance)){
+				min = distance;
 				included = edge->neighboor;
 			}
 		}
