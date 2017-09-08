@@ -155,7 +155,6 @@ list_t* djikstra(graph_t* graph, int (*compare)(void*, void*)){
 		list_t* destinations = graph->vertex;
 		node_t* current_w = (node_t*)destinations->head;
 
-
 		while(current_w != NULL){
 
 			vertex_t* w = (vertex_t*)current_w->data;
