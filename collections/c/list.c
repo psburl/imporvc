@@ -61,6 +61,7 @@ void list_print(list_t* list, void (*print)(void*)){
     node_t* node = list->head;
    
     while(node != NULL){
+        if(node->data != NULL)
         print(node->data);
         node = node->next;
     }

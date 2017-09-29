@@ -92,7 +92,9 @@ graph_path_t* graph_min_distance_recursion(graph_path_t* path, list_t* passed,
 	// set this vertex to already passed.
 	list_append(passed, c);
 	list_t* adjacencies = c->adjacencies;//get adjacencies
-	node_t* element = (node_t*)adjacencies->head;
+	node_t* element = NULL;
+	if(adjacencies != NULL)
+		element= (node_t*)adjacencies->head;
 	
 	while(element != NULL){
 
@@ -143,7 +145,7 @@ graph_path_t* graph_min_distance(graph_t* graph, vertex_t* v, vertex_t* w, int (
 	return path;
 }
 
-list_t* djikstra(graph_t* graph, int (*compare)(void*, void*)){
+list_t* GetMinDistances(graph_t* graph, int (*compare)(void*, void*)){
 
 	list_t* list = new_list(sizeof(graph_path_t));
 	list_t* vertex = graph->vertex;
@@ -154,6 +156,7 @@ list_t* djikstra(graph_t* graph, int (*compare)(void*, void*)){
 		vertex_t* v = (vertex_t*)current_v->data;
 
 		list_t* destinations = graph->vertex;
+
 		node_t* current_w = (node_t*)destinations->head;
 
 		while(current_w != NULL){

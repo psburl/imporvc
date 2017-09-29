@@ -44,7 +44,7 @@ vertex_t* graph_get_vertex_by_data(graph_t* graph, void* value, int (*compare)(v
 void graph_add_adjacency(vertex_t* vertex, vertex_t* neighboor, double weight, int digraph);
 void graph_add_adjacency_by_data(graph_t* graph, void* data, void* data2, double weight, int (*compare)(void*, void*));
 graph_path_t* graph_min_distance(graph_t* graph, vertex_t* v, vertex_t* w, int (*compare)(void*, void*));
-list_t* djikstra(graph_t* graph, int (*compare)(void*, void*));
+list_t* GetMinDistances(graph_t* graph, int (*compare)(void*, void*));
 
 #include "graph.c"
 
