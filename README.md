@@ -5,6 +5,7 @@ A C library with several function implementations to encapsulate algorithms and 
 The project contains the following function domains, where each one has your own documentation:
 
 * [collections](collections/collections.md)
+* [string](string/string.md)
 
 ## using the library ##
 
