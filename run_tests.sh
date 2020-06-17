@@ -1,3 +1,7 @@
+if [ ! -d "./bin" ]; then
+  mkdir bin
+fi
+
 for test_file in $(find . -type f | grep -e "test_.*\.c")
 do 
     bin_name=$(echo $test_file | awk -F/ '{print $NF}' | sed 's/\.c//')
