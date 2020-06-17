@@ -9,4 +9,4 @@ The project contains the following function domains, where each one has your own
 
 ## using the library ##
 
-To use this library on you C or C++ program, just clone the repository on your project folder and start using importing the files.
+To use this library on your C or C++ program, just clone the repository on your project folder and start using importing the files.
