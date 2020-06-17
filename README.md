@@ -8,7 +8,8 @@ The project contains the following function domains, where each one has your own
 * [string](string/string.md)
 * [network](network/network.md)
 * [io](io/io.md)
-
+* [graph](graph/graph.md)
+  
 ## using the library ##
 
 To use this library on your C or C++ program, just clone the repository on your project folder and start using importing the files.
