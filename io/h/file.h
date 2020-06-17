@@ -1,13 +1,13 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
 #include <assert.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-char* file_read(char* directory);
+char *file_read(char *directory);
 
 #include "../c/file.c"
 

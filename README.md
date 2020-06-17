@@ -6,6 +6,8 @@ The project contains the following function domains, where each one has your own
 
 * [collections](collections/collections.md)
 * [string](string/string.md)
+* [network](network/network.md)
+* [io](io/io.md)
 
 ## using the library ##
 

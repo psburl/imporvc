@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 
-void int_print(void* value);
-void char_pointer_print(void* value);
+void int_print(void *value);
+void char_pointer_print(void *value);
 
 #include "../c/print.c"
 
