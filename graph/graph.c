@@ -145,7 +145,7 @@ graph_path_t* graph_min_distance(graph_t* graph, vertex_t* v, vertex_t* w, int (
 	return path;
 }
 
-list_t* GetMinDistances(graph_t* graph, int (*compare)(void*, void*)){
+list_t* get_min_distances(graph_t* graph, int (*compare)(void*, void*)){
 
 	list_t* list = new_list(sizeof(graph_path_t));
 	list_t* vertex = graph->vertex;

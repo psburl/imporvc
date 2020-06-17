@@ -48,7 +48,7 @@ int main(){
 	graph_add_adjacency(vertex2, vertex3, 2.0, 0);
 	graph_add_adjacency(vertex, vertex3, 2.0, 0);
 	
-	list_t* l = djikstra(graph, compare);
+	list_t* l = get_min_distances(graph, compare);
 
 	list_print(l, print_path);
 
